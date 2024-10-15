@@ -35,4 +35,18 @@ else
     echo "Docker Compose ya está instalado."
 fi
 
+# Verificar si OpenJDK 17 está instalado
+if ! java -version 2>&1 | grep "17" &> /dev/null; then
+    echo "OpenJDK 17 no está instalado. Instalando OpenJDK 17..."
+    sudo apt update
+    sudo apt install -y openjdk-17-jdk
+    echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+    source ~/.bashrc
+else
+    echo "OpenJDK 17 ya está instalado."
+fi
+
+# Mostrar el valor de JAVA_HOME
+echo "JAVA_HOME está configurado en: $JAVA_HOME"
+
 echo "Configuración completa. Puedes proceder a ejecutar el script de despliegue."
